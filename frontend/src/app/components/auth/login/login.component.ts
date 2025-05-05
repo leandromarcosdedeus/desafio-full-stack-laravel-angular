@@ -3,7 +3,6 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-login',
-  //usar modulo e não por component
   //standalone: true,
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'

@@ -9,6 +9,8 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 })
 export class LoginComponent {
 
+  msg: string | null = null;
+  type: 'success' | 'error' | null = null;
   loginForm: FormGroup;
 
   constructor(private fb: FormBuilder) {
@@ -20,8 +22,9 @@ export class LoginComponent {
 
   onSubmit() {
     if (this.loginForm.valid) {
+      this.msg = 'Login realizado com sucesso!';
+      this.type = 'error';
       console.log(this.loginForm.value);
-      // Chamar API de autenticação aqui
     }
   }
 }

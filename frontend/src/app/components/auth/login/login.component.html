@@ -19,18 +19,26 @@
           type="email"
           formControlName="email"
           class="form-control"
+          [ngClass]="{'is-invalid': email?.invalid && email?.touched}"
           placeholder="E-mail"
         />
+        <div *ngIf="email?.touched && email?.invalid" class="invalid-feedback">
+          <span *ngIf="email?.errors?.['required']">Por favor, digite seu usuário (e-mail de cadastro)!</span>
+        </div>
       </div>
       <div class="mb-3">
         <label for="senha" class="form-label">Senha</label>
         <input
           id="senha"
           type="password"
-          formControlName="senha"
+          formControlName="password"
           class="form-control"
+          [ngClass]="{'is-invalid': password?.invalid && password?.touched}"
           placeholder="Senha"
         />
+        <div *ngIf="password?.touched && password?.invalid" class="invalid-feedback">
+          <span *ngIf="password?.errors?.['required']">Digite uma senha</span>
+        </div>
       </div>
       <button type="submit" class="btn btn-primary w-100">ENTRAR</button>
     </form>

@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { AuthService } from '../../../services/auth/auth.service';
+import { TokenService } from '../../../services/token/token.service';
 
 @Component({
   selector: 'app-login',
@@ -13,24 +15,44 @@ export class LoginComponent {
   msg: string | null = null;
   type: 'success' | 'error' | null = null;
   loginForm: FormGroup;
+  showPassword: boolean = false;
 
-  constructor(private fb: FormBuilder, private authService: AuthService) {
+  constructor(private fb: FormBuilder, private router:Router, private authService: AuthService, private token: TokenService) {
     this.loginForm = this.fb.group({
-      email: ['', []],
-      senha: ['', []]
+      email: ['', [Validators.required]],
+      password: ['', [Validators.required]]
     });
   }
 
   onSubmit() {
+    if (this.loginForm.invalid) {
+      this.loginForm.markAllAsTouched();
+      return;
+    }
     if (this.loginForm.valid) {
-      this.msg = 'Login realizado com sucesso!';
-      this.type = 'error';
-      this.authService.login(this.loginForm).subscribe(
+      this.authService.login(this.loginForm.value).subscribe(
         data => {
+          this.handleResponse(data)
           console.log(data)
         }
       )
       console.log(this.loginForm.value);
+    } else {
+      this.msg = 'Preencha todos os campos corretamente.';
+      this.type = 'error';
     }
+  }
+
+  get email() {
+    return this.loginForm.get('email');
+  }
+
+  get password() {
+    return this.loginForm.get('password');
+  }
+
+  handleResponse(data: any){
+    console.log(data.acessToken)
+    this.token.handle(data.acessToken)
   }
 }

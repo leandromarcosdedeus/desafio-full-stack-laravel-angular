@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
 
 class AuthController extends Controller
 {
@@ -14,7 +17,7 @@ class AuthController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth:api', ['except' => ['login']]);
+        $this->middleware('auth:api', ['except' => ['login', 'signup']]);
     }
 
     /**
@@ -79,5 +82,21 @@ class AuthController extends Controller
             'token_type' => 'bearer',
             'expires_in' => auth()->factory()->getTTL() * 60
         ]);
+    }
+
+    public function signup(Request $request)
+    {
+        $validated = Validator::make($request->all(), [
+            'name' => 'required',
+            'email' => 'required| email| unique:users',
+            'password'=> 'required'
+        ]);
+
+        if ($validated->fails()) {
+            return response()->json(['message' => $validated->errors(), 'type' => 'error']);
+        }
+
+        $user = User::create($request->all());
+        return response()->json(['message' => 'User registered successfully.']);
     }
 }

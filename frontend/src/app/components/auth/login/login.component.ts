@@ -54,5 +54,7 @@ export class LoginComponent {
   handleResponse(data: any){
     console.log(data.acessToken)
     this.token.handle(data.acessToken)
+    this.authService.changeAuthStatus(true);
+    this.router.navigateByUrl('clinic');
   }
 }

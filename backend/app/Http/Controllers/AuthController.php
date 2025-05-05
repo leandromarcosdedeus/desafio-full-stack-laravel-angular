@@ -96,7 +96,12 @@ class AuthController extends Controller
             return response()->json(['message' => $validated->errors(), 'type' => 'error']);
         }
 
-        $user = User::create($request->all());
+        $user = User::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => bcrypt($request->password)
+
+        ]);
         return response()->json(['message' => 'User registered successfully.']);
     }
 }

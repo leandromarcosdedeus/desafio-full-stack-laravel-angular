@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { AuthService } from '../../../services/auth/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -13,7 +14,7 @@ export class LoginComponent {
   type: 'success' | 'error' | null = null;
   loginForm: FormGroup;
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder, private authService: AuthService) {
     this.loginForm = this.fb.group({
       email: ['', []],
       senha: ['', []]
@@ -24,6 +25,11 @@ export class LoginComponent {
     if (this.loginForm.valid) {
       this.msg = 'Login realizado com sucesso!';
       this.type = 'error';
+      this.authService.login(this.loginForm).subscribe(
+        data => {
+          console.log(data)
+        }
+      )
       console.log(this.loginForm.value);
     }
   }

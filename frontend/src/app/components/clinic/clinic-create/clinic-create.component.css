@@ -1,0 +1,49 @@
+.title {
+  position: relative;
+  font-weight: bold;
+}
+.card {
+  border-color: #007bff;
+}
+.card-header {
+  padding: 10px 10px;
+  margin: 0px;
+}
+.card-footer {
+  border: none;
+}
+.nav-icon {
+  font-size: 11pt;
+}
+label {
+  font-size: 11pt;
+  font-weight: normal;
+}
+input {
+  font-size: 11pt;
+}
+.btn {
+  font-size: 10pt;
+  font-weight: bold;
+}
+.btn-cancel {
+  border-color: #007bff;
+  color: #007bff;
+}
+.btn-cancel:hover {
+  background-color: #007bff;
+  color: #fff;
+}
+.buttons {
+  float: right;
+  padding-right: 15px;
+}
+.btn-icon {
+  font-size: 9pt;
+  padding-right: 3px;
+}
+#FF0000{
+  color: 	#dc3545;
+  font-size: 9pt;
+  padding-left: 2px;
+}

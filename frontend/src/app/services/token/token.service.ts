@@ -36,8 +36,13 @@ export class TokenService {
     return this.decode(payload);
   }
   decode(payload: any){
-    return JSON.parse(atob(payload));
+    try {
+      return JSON.parse(atob(payload));
+    } catch (e) {
+      return null;
+    }
   }
+
   loggedIn(){
     return this.isValid()
   }

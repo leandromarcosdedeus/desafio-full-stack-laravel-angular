@@ -20,7 +20,7 @@ class ClinicController extends Controller
     {
         $data = $request->validate([
             'corporate_name' => 'required|string',
-            'trade_name'     => 'required|string',
+            'fantasy_name'     => 'required|string',
             'cnpj'           => 'required|string',
             'regional_id'    => 'required|uuid|exists:regionals,id',
             'opening_date'   => 'required|date',

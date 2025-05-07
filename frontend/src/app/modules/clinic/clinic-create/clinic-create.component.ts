@@ -16,8 +16,13 @@ export class ClinicCreateComponent {
 
 
   public form: FormGroup = new FormGroup({
-    'regional': new FormControl(null, [Validators.required]),
-    'nome': new FormControl(null, [Validators.required]),
+    'regional_id': new FormControl(null, [Validators.required]),
+    'corporate_name': new FormControl(null, [Validators.required]),
+    'fantasy_name': new FormControl(null, [Validators.required]),
+    'cnpj': new FormControl(null, [Validators.required]),
+    'opening_date': new FormControl(null, [Validators.required]),
+    'is_active': new FormControl(null, [Validators.required]),
+    'specialties': new FormControl(null),
 
   });
 
@@ -31,9 +36,10 @@ export class ClinicCreateComponent {
 
 
   createClinic() {
+   // this.spinner.show();
+    console.log('dados: ', this.form.value);
+
     if (this.form.status === 'VALID') {
-      this.spinner.show();
-      console.log('dados: ', this.form.value);
       this.clinicService.create(this.form.value).subscribe(
         (data: any) => {
           this.spinner.hide();

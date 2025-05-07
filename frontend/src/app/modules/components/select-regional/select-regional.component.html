@@ -1,1 +1,17 @@
-<p>select-regional works!</p>
+<div class="mb-3">
+  <label class="form-label">{{ label }}</label>
+  <ng-select
+    [items]="regionals"
+    bindLabel="name"
+    bindValue="id"
+    [(ngModel)]="value"
+    (ngModelChange)="onChange($event)"
+    [placeholder]="placeholder"
+    [disabled]="disabled"
+    [multiple]="multiple"
+    [searchable]="true"
+    [loading]="loading"
+    loadingText="Carregando..."
+    class="form-control">
+  </ng-select>
+</div>

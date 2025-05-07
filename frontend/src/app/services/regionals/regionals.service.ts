@@ -5,8 +5,7 @@ import { TokenService } from '../token/token.service';
 @Injectable({
   providedIn: 'root'
 })
-export class ClinicService {
-
+export class RegionalsService {
 
   httpOptions = {
     headers: new HttpHeaders({
@@ -15,16 +14,9 @@ export class ClinicService {
     })
   };
 
-
   constructor(private http:HttpClient, private token:TokenService) { }
 
-
-  create(data: any) {
-    return this.http.post('http://localhost:8000/api/clinic', data, this.httpOptions);
-  }
-  list(){
-    console.log('httpOptions', this.httpOptions)
-    return this.http.get('http://localhost:8000/api/clinic', this.httpOptions);
+  getRegionals(){
+    return this.http.get('http://localhost:8000/api/regionals', this.httpOptions);
   }
 }
-

@@ -7,9 +7,11 @@ export class TokenService {
 
   constructor() { }
 
-  handle(token: any){
-    this.set(token);
+  handle(token: string) {
+    const fullToken = token;
+    this.set(fullToken);
   }
+
 
   set(token: any){
     return localStorage.setItem('token', token);

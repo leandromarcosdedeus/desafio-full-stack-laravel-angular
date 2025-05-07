@@ -27,7 +27,7 @@ Route::middleware('auth:api')->group(function () {
     Route::get('regionals', 'RegionalsController@index');
 
     //ClinicSpecialty
-    Route::get('specialty', 'ClinicSpecialtyController@index');
+    Route::get('clinic-specialty', 'ClinicSpecialtyController@index');
 
 
 });

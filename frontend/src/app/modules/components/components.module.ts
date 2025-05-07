@@ -4,16 +4,18 @@ import { FormsModule } from '@angular/forms';
 import { NgSelectModule } from '@ng-select/ng-select';
 
 import { SelectRegionalComponent } from './select-regional/select-regional.component';
+import { SelectClinicSpecialtyComponent } from './select-clinic-specialty/select-clinic-specialty.component';
 
 @NgModule({
-  declarations: [SelectRegionalComponent],
+  declarations: [SelectRegionalComponent, SelectClinicSpecialtyComponent],
   imports: [
     CommonModule,
     FormsModule,
     NgSelectModule
   ],
   exports: [
-    SelectRegionalComponent
+    SelectRegionalComponent,
+    SelectClinicSpecialtyComponent
   ]
 })
 export class ComponentsModule { }

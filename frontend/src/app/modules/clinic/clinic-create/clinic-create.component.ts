@@ -17,6 +17,8 @@ export class ClinicCreateComponent {
 
   public form: FormGroup = new FormGroup({
     'regional': new FormControl(null, [Validators.required]),
+    'nome': new FormControl(null, [Validators.required]),
+
   });
 
   constructor(

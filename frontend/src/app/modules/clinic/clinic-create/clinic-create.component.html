@@ -68,6 +68,17 @@
                     placeholder="Selecione a data" />
                 </div>
 
+
+                <div class="col-md-6 col-sm-12">
+                  <app-select-clinic-specialty
+                  [label]="'Especialidades medicas atendidas'"
+                  [placeholder]="'Selecione a regional'"
+                  [multiple]="false"
+                  [disabled]="false"
+                  [(value)]="form.get('regional')!.value">
+                </app-select-clinic-specialty>
+                </div>
+
                 <div class="col-12 mt-3">
                   <div class="form-check">
                     <input

@@ -47,17 +47,16 @@
                     formControlName="cnpj"
                     placeholder="CNPJ" />
                 </div>
-
-                <div class="col-md-6 col-sm-12">
+                <div class="col-md-6 col-sm-6">
                   <app-select-regional
                   [label]="'Regional'"
                   [placeholder]="'Selecione a regional'"
                   [multiple]="false"
                   [disabled]="false"
-                  [(value)]="form.get('regional_id')!.value">
+                  [value]="form.get('regional_id')!.value"
+                  (valueChange)="form.get('regional_id')!.setValue($event)">
                 </app-select-regional>
                 </div>
-
                 <div class="col-md-6 col-sm-12">
                   <label class="form-label" for="opening_date">Data de Inauguração</label>
                   <input
@@ -68,14 +67,14 @@
                     placeholder="Selecione a data" />
                 </div>
 
-
-                <div class="col-md-6 col-sm-12">
+                <div class="col-md-6 col-sm-6">
                   <app-select-clinic-specialty
-                  [label]="'Especialidades medicas atendidas'"
+                  [label]="'Especialidades médicas atendidas'"
                   [placeholder]="'Selecione a especialidade médica'"
                   [multiple]="true"
                   [disabled]="false"
-                  [(value)]="form.get('specialties')!.value">
+                  [value]="form.get('specialties')!.value"
+                  (valueChange)="form.get('specialties')!.setValue($event)">
                 </app-select-clinic-specialty>
                 </div>
 

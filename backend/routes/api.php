@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ClinicController;
 use App\Http\Controllers\RegionalsController;
+use App\Http\Controllers\SpecialtiesController;
 
 
 
@@ -22,12 +23,16 @@ Route::middleware('auth:api')->group(function () {
 
     //Clínicas
     Route::get('clinic', 'ClinicController@index');
+    Route::post('clinic', 'ClinicController@store');
 
     //Regionais
     Route::get('regionals', 'RegionalsController@index');
 
     //ClinicSpecialty
     Route::get('clinic-specialty', 'ClinicSpecialtyController@index');
+
+    //Specialty
+    Route::get('specialty', 'SpecialtiesController@index');
 
 
 });

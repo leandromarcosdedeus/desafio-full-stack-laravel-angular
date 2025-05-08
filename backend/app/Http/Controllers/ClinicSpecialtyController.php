@@ -9,6 +9,6 @@ class ClinicSpecialtyController extends Controller
 {
     public function index()
     {
-        return $specialty = ClinicSpecialty::all();
+        return $specialty = ClinicSpecialty::with('spe')->all();
     }
 }

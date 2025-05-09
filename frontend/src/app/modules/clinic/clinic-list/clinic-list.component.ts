@@ -7,6 +7,7 @@ import { Router } from '@angular/router';
 import { style } from '@angular/animations';
 import { ClinicService } from '../../../services/clinic/clinic.service';
 import { AuthService } from '../../../services/auth/auth.service';
+import { ChangeDetectorRef } from '@angular/core';
 
 @Component({
   selector: 'app-clinic-list',
@@ -27,97 +28,78 @@ export class ClinicListComponent implements OnInit, OnDestroy {
     private router: Router,
     private spinner: NgxSpinnerService,
     private clinicService: ClinicService,
-    private authService: AuthService
+    private authService: AuthService,
+    private cd: ChangeDetectorRef
+
   ) { }
 
   ngOnInit(): void {
-    /* this.dtOptions = {
-      pagingType: 'simple_numbers',
-      pageLength: 20,
-      lengthMenu: [[5, 10, 25, 50, -1], ['5 linhas', '10', '25', '50', 'Mostrar tudo']],
-      responsive: true,
-      dom: 'Bfrtip',
-      buttons: [
-        {
-          extend: 'excel',
-          text: '<i class="far fa-file-excel mr-2"></i>Excel',
-          className: 'btn-sm btn-secondary'
-        },
-        {
-          text: '<i class="fas fa-print mr-2"></i>',
-          className: 'btn-sm btn-secondary',
-
-        }
-      ],
-      language: {
-        search: '',
-        searchPlaceholder: 'qwe',
-      }
-    }; */
-
     this.dtOptions = {
       pagingType: 'simple_numbers',
       responsive: true,
-      scrollX: true,
-      lengthMenu: [[20, 50, 100, -1], ['20 linhas', '50 linhas', '100 linhas', 'Mostrar Todas']],
-      dom: `
-
-          <'row'<'col-sm-12'tr>>
-          <'row'<'col-sm-12 col-md-5'i><'col-sm-12 col-md-7'p>>
-        `,
-      buttons: [
+      pageLength: 10,
+      dom: "<'row mb-3'<'col-12'f>>" + // <-- barra de pesquisa
+        "<'row'<'col-12'B>>" +      // botões
+        "<'row'<'col-sm-12'tr>>" +
+        "<'row mt-2'<'col-sm-5'i><'col-sm-7'p>>",
+      /* buttons: [
         {
           extend: 'excel',
-          text: '<i class="far fa-file-excel mr-2"></i>Excel',
-          className: 'btn-sm btn-secondary',
+          text: 'Exportar Excel',
+          className: 'btn btn-sm btn-secondary',
         },
         {
-          text: '<i class="fas fa-print mr-2"></i>Imprimir',
-          className: 'btn-sm btn-secondary',
-          action: () => {}
+          extend: 'print',
+          text: 'Imprimir',
+          className: 'btn btn-sm btn-secondary',
         }
-      ],
+      ], */
       language: {
-        url: "https://cdn.datatables.net/plug-ins/1.10.22/i18n/Portuguese-Brasil.json",
-        language: ""
+        url: 'https://cdn.datatables.net/plug-ins/1.10.22/i18n/Portuguese-Brasil.json'
       },
+      initComplete: function () {
+        setTimeout(() => {
+          const input = document.querySelector('.dt-search input.dt-input') as HTMLInputElement;
+          const label = document.querySelector('label[for="dt-search-0"]');
+          if (label) {
+            label.textContent = ''; // remove o texto "Pesquisar"
+          }
+          if (input) {
+            input.classList.add('form-control', 'form-control-sm', 'mb-3');
+            input.placeholder = 'Buscar entidade...';
+            input.style.width = '250px';
+            input.style.marginLeft = '10px';
+            input.setAttribute('style',
+              `
+                width: 100%;
+                padding: 0.5rem 0.75rem 0.5rem 2.2rem;
+                border: 1px solid #ced4da;
+                border-radius: 0.375rem;
+                font-size: 1rem;
+              `
+            );
+          }
+
+        }, 50);
+      }
+
     };
 
 
-
-      this.clinics = [
-
-        { id: 2, name: 'Clínica B', city: 'RJ', status: 1 },
-        { id: 2, name: 'Clínica B', city: 'RJ', status: 1 },
-        { id: 2, name: 'Clínica B', city: 'RJ', status: 1 },
-        { id: 2, name: 'Clínica B', city: 'RJ', status: 1 },
-        { id: 2, name: 'Clínica B', city: 'RJ', status: 1 },
-        { id: 2, name: 'Clínica B', city: 'RJ', status: 1 },
-        { id: 2, name: 'Clínica B', city: 'RJ', status: 1 },
-        { id: 2, name: 'Clínica B', city: 'RJ', status: 1 },
-        { id: 2, name: 'Clínica B', city: 'RJ', status: 1 },
-        { id: 2, name: 'Clínica B', city: 'RJ', status: 1 },
-        { id: 2, name: 'Clínica B', city: 'RJ', status: 1 },
-        { id: 2, name: 'Clínica B', city: 'RJ', status: 1 },
-        { id: 2, name: 'Clínica B', city: 'RJ', status: 0 },
-        { id: 2, name: 'Clínica B', city: 'RJ', status: 0 },
-        { id: 2, name: 'Clínica B', city: 'RJ', status: 0 },
-        { id: 2, name: 'Clínica B', city: 'RJ', status: 0 },
-        { id: 2, name: 'Clínica B', city: 'RJ', status: 0 },
-        { id: 2, name: 'Clínica B', city: 'RJ', status: 0 },
-        { id: 2, name: 'Clínica B', city: 'RJ', status: 1 },
-        { id: 2, name: 'Clínica B', city: 'RJ', status: 1 },
-        { id: 2, name: 'Clínica B', city: 'RJ', status: 1 },
-        { id: 2, name: 'Clínica B', city: 'RJ', status: 1 },
-        { id: 2, name: 'Clínica B', city: 'RJ', status: 1 },
-        { id: 2, name: 'Clínica B', city: 'RJ', status: 1 },
-      ];
-    /* setTimeout(() => {
-      this.dtTrigger.next(null);
-    }, 1000); */
-    this.clinicService.list().subscribe(data=>{ console.log('data', this.clinics = data)});
   }
 
+
+  ngAfterViewInit(): void {
+    this.loadClinics();
+    initComplete: () => {
+      const searchInput = document.querySelector('.dt-search input.dt-input');
+      if (searchInput) {
+        searchInput.classList.add('form-control', 'form-control-sm');
+        searchInput.setAttribute('placeholder', 'Buscar entidade...');
+        (searchInput as HTMLElement).setAttribute('style', 'width: 250px; margin-left: 10px; display: inline-block;');
+      }
+    }
+  }
   ngOnDestroy(): void {
     this.dtTrigger.unsubscribe();
   }
@@ -128,4 +110,25 @@ export class ClinicListComponent implements OnInit, OnDestroy {
     });
   }
 
+  loadClinics(): void {
+    this.clinicService.list().subscribe(data => {
+      this.clinics = data;
+      this.rerender();
+    });
+  }
+
+  rerender(): void {
+    if(this.dtElement.dtInstance != undefined) {
+      this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
+        dtInstance.destroy();
+        this.dtTrigger.next(null);
+      });
+    } else {
+      this.dtTrigger.next(null);
+    }
+  }
+
+  routeEdit(id: number){
+    this.router.navigate(['/clinic/edit', id]);
+  }
 }

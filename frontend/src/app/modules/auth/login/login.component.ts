@@ -56,4 +56,9 @@ export class LoginComponent {
     this.authService.changeAuthStatus(true);
     this.router.navigateByUrl('clinic');
   }
+
+  passwordVisibility() {
+    this.showPassword = !this.showPassword;
+  }
+
 }

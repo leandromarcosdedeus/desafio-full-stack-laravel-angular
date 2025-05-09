@@ -32,12 +32,15 @@ Route::middleware('auth:api')->group(function () {
 
     //Regionais
     Route::get('regionals', 'RegionalsController@index');
+    Route::post('regionals', 'RegionalsController@store');
+
 
     //ClinicSpecialty
     Route::get('clinic-specialty', 'ClinicSpecialtyController@index');
 
     //Specialty
     Route::get('specialty', 'SpecialtiesController@index');
+    Route::post('specialty', 'SpecialtiesController@store');
 
 
 });

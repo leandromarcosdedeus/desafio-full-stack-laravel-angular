@@ -1,3 +1,7 @@
-<div class="sidenav-container">
-  <button *ngIf="isLoggedIn" (click)="logout()" class="logoff-button">Logout</button>
-</div>
+<nav class="navbar navbar-expand-lg navbar-light bg-light shadow-sm px-3" *ngIf="isLoggedIn">
+  <div class="ms-auto">
+    <button class="btn btn-outline btn-sm" (click)="logout()">
+      <i class="fas fa-sign-out-alt me-1"></i> Sair
+    </button>
+  </div>
+</nav>

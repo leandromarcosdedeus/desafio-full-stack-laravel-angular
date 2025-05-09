@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AbstractControl, FormControl, FormGroup, ValidationErrors, Validators } from '@angular/forms';
+import { AbstractControl, FormControl, FormGroup, ValidationErrors, Validators, ValidatorFn } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ClinicService } from '../../../services/clinic/clinic.service';
@@ -35,7 +35,7 @@ export class ClinicCreateComponent implements OnInit {
       'cnpj': new FormControl(null, [Validators.required, this.validateCNPJ()]),
       'opening_date': new FormControl(null, [Validators.required]),
       'is_active': new FormControl(true),
-      'specialties': new FormControl(null),
+      'specialties': new FormControl(null, [this.minSpecialtiesValidator(5)])
     });
 
     if (this.clinicId) {
@@ -56,12 +56,20 @@ export class ClinicCreateComponent implements OnInit {
   }
 
   createClinic() {
+
+    const rawCnpj = String(this.form.get('cnpj')?.value || '');
+      const cleanCnpj = rawCnpj.replace(/\D/g, '');
+      this.form.get('cnpj')?.setValue(cleanCnpj);
+
+      console.log(this.form.value)
+
     if (this.form.valid) {
       this.spinner.show();
 
       const request = this.clinicId
         ? this.clinicService.update(this.clinicId, this.form.value)
         : this.clinicService.create(this.form.value);
+
 
       request.subscribe(
         (res: any) => {
@@ -81,6 +89,10 @@ export class ClinicCreateComponent implements OnInit {
           this.type = 'error';
         }
       );
+    } else {
+      this.form.markAllAsTouched();
+      this.msg = 'Corrija os erros destacados no formulário.';
+      this.type = 'error';
     }
   }
 
@@ -122,42 +134,51 @@ export class ClinicCreateComponent implements OnInit {
     this.showModal = false;
   }
 
-  validateCNPJ() {
+  validateCNPJ(): ValidatorFn {
     return (control: AbstractControl): ValidationErrors | null => {
-      const cnpj = (control.value || '').replace(/\D/g, '');
+      const raw = String(control.value || '');
+      const cnpj = raw.replace(/\D/g, '');
 
       if (!cnpj || cnpj.length !== 14 || /^(\d)\1+$/.test(cnpj)) {
         return { cnpjInvalido: true };
       }
 
-      let tamanho = cnpj.length - 2;
-      let numeros = cnpj.substring(0, tamanho);
-      const digitos = cnpj.substring(tamanho);
-      let soma = 0;
-      let pos = tamanho - 7;
+      const validateDigit = (base: string, weights: number[]): number => {
+        const sum = base.split('').reduce((acc, num, idx) => acc + Number(num) * weights[idx], 0);
+        const rest = sum % 11;
+        return rest < 2 ? 0 : 11 - rest;
+      };
 
-      for (let i = tamanho; i >= 1; i--) {
-        soma += Number(numeros.charAt(tamanho - i)) * pos--;
-        if (pos < 2) pos = 9;
+      const base = cnpj.slice(0, 12);
+      const digit1 = validateDigit(base, [5, 4, 3, 2, 9, 8, 7, 6, 5, 4, 3, 2]);
+      const digit2 = validateDigit(base + digit1, [6, 5, 4, 3, 2, 9, 8, 7, 6, 5, 4, 3, 2]);
+
+      if (digit1 !== Number(cnpj[12]) || digit2 !== Number(cnpj[13])) {
+        return { cnpjInvalido: true };
       }
-
-      let resultado = soma % 11 < 2 ? 0 : 11 - (soma % 11);
-      if (resultado !== Number(digitos.charAt(0))) return { cnpjInvalido: true };
-
-      tamanho += 1;
-      numeros = cnpj.substring(0, tamanho);
-      soma = 0;
-      pos = tamanho - 7;
-
-      for (let i = tamanho; i >= 1; i--) {
-        soma += Number(numeros.charAt(tamanho - i)) * pos--;
-        if (pos < 2) pos = 9;
-      }
-
-      resultado = soma % 11 < 2 ? 0 : 11 - (soma % 11);
-      if (resultado !== Number(digitos.charAt(1))) return { cnpjInvalido: true };
 
       return null;
     };
   }
+
+
+  minArrayLength(min: number): ValidatorFn {
+    return (control: AbstractControl): ValidationErrors | null => {
+      const value = control.value;
+      if (Array.isArray(value) && value.length >= min) {
+        return null;
+      }
+      return { minArrayLength: { requiredLength: min, actualLength: value?.length || 0 } };
+    };
+  }
+  minSpecialtiesValidator(min: number) {
+    return (control: AbstractControl): ValidationErrors | null => {
+      const value = control.value;
+      if (Array.isArray(value) && value.length >= min) {
+        return null;
+      }
+      return { minSpecialties: true };
+    };
+  }
+
 }

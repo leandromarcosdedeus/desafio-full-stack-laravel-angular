@@ -42,27 +42,45 @@ export class ClinicListComponent implements OnInit, OnDestroy {
      "<'row'<'col-12 text-end'B>>" +
      "<'row'<'col-sm-12'tr>>" +
      "<'row mt-2'<'col-sm-5 text-end'i><'col-sm-7 text-end'p>>",
-      /* buttons: [
-        {
-          extend: 'excel',
-          text: 'Exportar Excel',
-          className: 'btn btn-sm btn-secondary',
-        },
-        {
-          extend: 'print',
-          text: 'Imprimir',
-          className: 'btn btn-sm btn-secondary',
-        }
-      ], */
+     buttons: [
+     /*  {
+        extend: 'copy',
+        text: 'Copiar',
+        className: 'btn btn-light border btn-sm mx-1'
+      }, */
+     /*  {
+        extend: 'csv',
+        text: 'CSV',
+        className: 'btn btn-light border btn-sm mx-1 rounded'
+      },
+      {
+        extend: 'print',
+        text: 'Imprimir',
+        className: 'btn btn-light border btn-sm mx-1 rounded'
+      } */
+    ],
       language: {
-        url: 'https://cdn.datatables.net/plug-ins/1.10.22/i18n/Portuguese-Brasil.json'
+        url: 'https://cdn.datatables.net/plug-ins/1.10.22/i18n/Portuguese-Brasil.json',
+        paginate: {
+          first: '«',
+          last: '»',
+          next: '>',
+          previous: '<',
+          className: 'btn btn-light border btn-sm mx-1'
+        },
+        info: '',
+        search: '',
+        searchPlaceholder: 'Buscar entidade...'
       },
       initComplete: function () {
         setTimeout(() => {
           const input = document.querySelector('.dt-search input.dt-input') as HTMLInputElement;
           const label = document.querySelector('label[for="dt-search-0"]');
+          const buttonTeste = document.querySelector('dt-button');
+
+
           if (label) {
-            label.textContent = ''; // remove o texto "Pesquisar"
+            label.textContent = '';
           }
           if (input) {
             input.classList.add('form-control', 'form-control-sm', 'mb-3');
@@ -72,7 +90,7 @@ export class ClinicListComponent implements OnInit, OnDestroy {
             input.setAttribute('style',
               `
                 width: 100%;
-                padding: 0.5rem 0.75rem 0.5rem 2.2rem;
+                padding: 0.5rem 0.5rem 0.5rem 2.2rem;
                 border: 1px solid #ced4da;
                 border-radius: 0.375rem;
                 font-size: 1rem;

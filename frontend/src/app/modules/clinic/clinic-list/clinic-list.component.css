@@ -28,3 +28,17 @@ div.dataTables_filter label::before {
   font-size: 0.875rem;
 }
 
+
+.dt-custom-button {
+  background-color: #dbeafe !important;
+  color: #000 !important;
+  border-color: #93c5fd !important;
+  padding: 6px 14px;
+  border-radius: 4px;
+  font-weight: 500;
+  margin-right: 8px;
+}
+
+.dt-custom-button:hover {
+  background-color: #bfdbfe !important;
+}

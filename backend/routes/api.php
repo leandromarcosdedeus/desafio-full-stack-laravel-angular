@@ -24,6 +24,9 @@ Route::middleware('auth:api')->group(function () {
     //Clínicas
     Route::get('clinic', 'ClinicController@index');
     Route::post('clinic', 'ClinicController@store');
+    Route::put('clinic/{id}', 'ClinicController@update');
+    Route::get('clinic/show/{id}', 'ClinicController@show');
+    Route::delete('clinic/{id}', 'ClinicController@destroy');
 
     //Regionais
     Route::get('regionals', 'RegionalsController@index');

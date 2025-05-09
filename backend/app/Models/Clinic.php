@@ -19,9 +19,9 @@ class Clinic extends Model
     {
         return $this->belongsTo(Regionals::class);
     }
+
     public function specialties()
     {
-        return $this->belongsToMany(Specialties::class);
+        return $this->belongsToMany(Specialties::class, 'clinic_specialties', 'clinic_id', 'specialty_id');
     }
-
 }

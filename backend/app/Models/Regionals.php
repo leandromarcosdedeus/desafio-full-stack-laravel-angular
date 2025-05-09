@@ -10,7 +10,7 @@ class Regionals extends Model
     protected $keyType = 'string';
 
     protected $fillable = [
-        'name',
+        'name'
     ];
 
     public function clinics()

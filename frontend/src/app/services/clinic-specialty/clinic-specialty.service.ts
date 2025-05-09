@@ -16,7 +16,10 @@ export class ClinicSpecialtyService {
   }
   constructor(private http:HttpClient, private token:TokenService) { }
 
-  getSpecialty(){
+  getClinicSpecialty(){
     return this.http.get('http://localhost:8000/api/clinic-specialty', this.httpOptions);
+  }
+  getSpecialty(){
+    return this.http.get('http://localhost:8000/api/specialty', this.httpOptions);
   }
 }

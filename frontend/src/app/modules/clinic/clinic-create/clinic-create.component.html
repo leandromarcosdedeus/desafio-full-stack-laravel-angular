@@ -5,20 +5,24 @@
 
       <!-- left column -->
       <div class="col-12">
-        <div class="card card-primary">
-          <div class="card-header">
-            <span class="mt-3 title">
-              CADASTRAR ENTIDADE
-            </span>
+        <div class="card card-primary mx-auto" style="max-width: 1000px; max-height: 1000px;">
+          <div class="card-header" *ngIf="clinicId == 0">
+            <span class="mt-3 title">CRIAR ENTIDADE</span>
           </div>
 
+          <div class="card-header d-flex justify-content-between align-items-center" *ngIf="clinicId != 0">
+            <span class="mt-1 title">EDITAR ENTIDADE</span>
+            <button type="button" class="btn btn-outline-danger px-4 py-2" (click)="openModal()">
+              excluir
+            </button>
 
+          </div>
 
           <form [formGroup]="form" (ngSubmit)="createClinic()">
-            <div class="card-body">
+            <div class="card-body p-4">
               <div class="row">
 
-                <div class="col-md-6 col-sm-6">
+                <div class="col-sm-12 col-md-6 mb-3">
                   <label class="form-label" for="corporate_name">Nome</label>
                   <input
                     type="text"
@@ -28,7 +32,7 @@
                     placeholder="Razão Social" />
                 </div>
 
-                <div class="col-md-6 col-sm-6">
+                <div class="col-sm-12 col-md-6 mb-3">
                   <label class="form-label" for="fantasy_name">Nome</label>
                   <input
                     type="text"
@@ -47,7 +51,7 @@
                     formControlName="cnpj"
                     placeholder="CNPJ" />
                 </div>
-                <div class="col-md-6 col-sm-6">
+                <div class="col-sm-12 col-md-6 mb-3">
                   <app-select-regional
                   [label]="'Regional'"
                   [placeholder]="'Selecione a regional'"
@@ -57,7 +61,7 @@
                   (valueChange)="form.get('regional_id')!.setValue($event)">
                 </app-select-regional>
                 </div>
-                <div class="col-md-6 col-sm-12">
+                <div class="col-sm-12 col-md-6 mb-3">
                   <label class="form-label" for="opening_date">Data de Inauguração</label>
                   <input
                     type="date"
@@ -67,7 +71,7 @@
                     placeholder="Selecione a data" />
                 </div>
 
-                <div class="col-md-6 col-sm-6">
+                <div class="col-sm-12 col-md-6 mb-3">
                   <app-select-clinic-specialty
                   [label]="'Especialidades médicas atendidas'"
                   [placeholder]="'Selecione a especialidade médica'"
@@ -78,7 +82,7 @@
                 </app-select-clinic-specialty>
                 </div>
 
-                <div class="col-12 mt-3">
+                <div class="col-sm-12 col-md-6 mb-3">
                   <div class="form-check">
                     <input
                       class="form-check-input"
@@ -95,13 +99,34 @@
               </div>
             </div>
 
-            <div class="card-footer d-flex gap-2">
-              <button type="submit" class="btn btn-primary">Salvar</button>
-              <button type="button" class="btn btn-secondary" [routerLink]="'/clinic'">Cancelar</button>
+            <div class="card-footer d-flex justify-content-end gap-2 mt-4">
+              <button type="button" class="btn btn-light border px-4 py-2 text-dark" [routerLink]="'/clinic'">
+                cancelar
+              </button>
+              <button type="submit" class="btn btn-primary px-4 py-2" style="background-color: #dbeafe; color: #000; border-color: #93c5fd;">
+                salvar
+              </button>
             </div>
+
+            <div *ngIf="msg" [ngClass]="type === 'success' ? 'alert-success-custom' : 'alert-error-custom'" class="alert-container mt-4">
+              <span>{{ msg }}</span>
+              <button type="button" class="btn-ok" (click)="fecharMensagem()">OK</button>
+            </div>
+
           </form>
         </div>
       </div>
     </div>
   </div>
+
+  <div *ngIf="showModal" class="modal-overlay">
+    <div class="modal-box">
+      <p class="mb-3">Tem certeza que deseja excluir esta entidade?</p>
+      <div class="d-flex justify-content-end gap-2">
+        <button class="btn btn-light" (click)="closeModal()">Cancelar</button>
+        <button class="btn btn-danger" (click)="delete()">Confirmar</button>
+      </div>
+    </div>
+  </div>
+
 </section>

@@ -22,9 +22,22 @@ export class ClinicService {
   create(data: any) {
     return this.http.post('http://localhost:8000/api/clinic', data, this.httpOptions);
   }
+
   list(){
     console.log('httpOptions', this.httpOptions)
     return this.http.get('http://localhost:8000/api/clinic', this.httpOptions);
   }
+  edit(id: number){
+    console.log('httpOptions', this.httpOptions)
+    return this.http.get('http://localhost:8000/api/clinic/show/'+id, this.httpOptions);
+  }
+  update(id: number, data: any) {
+    return this.http.put(`http://localhost:8000/api/clinic/`+id, data, this.httpOptions);
+  }
+
+  delete(id: number) {
+    return this.http.delete(`http://localhost:8000/api/clinic/${id}`, this.httpOptions);
+  }
+
 }
 

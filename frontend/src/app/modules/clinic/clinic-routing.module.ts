@@ -11,7 +11,10 @@ const routes: Routes = [
   {
     path: 'create',
     component: ClinicCreateComponent
-  }
+  },
+  {
+    path: 'edit/:id', component: ClinicCreateComponent
+  },
 ];
 
 @NgModule({

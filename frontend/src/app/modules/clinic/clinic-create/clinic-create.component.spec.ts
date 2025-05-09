@@ -11,7 +11,7 @@ describe('ClinicCreateComponent', () => {
       imports: [ClinicCreateComponent]
     })
     .compileComponents();
-    
+
     fixture = TestBed.createComponent(ClinicCreateComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
@@ -21,3 +21,5 @@ describe('ClinicCreateComponent', () => {
     expect(component).toBeTruthy();
   });
 });
+
+

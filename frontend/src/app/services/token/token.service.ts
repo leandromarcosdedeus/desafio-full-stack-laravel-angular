@@ -14,7 +14,6 @@ export class TokenService {
 
 
   set(token: any){
-    console.log('tt', token)
     localStorage.setItem('token_type', token.token_type)
     return localStorage.setItem('token', token.access_token);
   }

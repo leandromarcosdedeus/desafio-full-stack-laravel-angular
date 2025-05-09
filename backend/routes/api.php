@@ -10,6 +10,8 @@ use App\Http\Controllers\SpecialtiesController;
 
 
 Route::post('login', 'AuthController@login');
+Route::post('/refresh', [AuthController::class, 'refresh']);
+
 
 Route::middleware('auth:api')->group(function () {
     //Usuário

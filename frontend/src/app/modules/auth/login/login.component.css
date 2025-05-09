@@ -7,9 +7,8 @@
 }
 
 .message {
-  margin: 5px;
   font-size: 18px;
-  margin-bottom: 7px;
+  margin: 5px 0 7px;
 }
 
 .card-content {
@@ -36,6 +35,9 @@
   padding: 12px;
   font-size: 0.95rem;
   background-color: #eaf2ff;
+  color: #000 !important;
+  box-sizing: border-box;
+  height: 40px;
 }
 
 .card-content .form-control::placeholder {
@@ -65,30 +67,38 @@
   border-color: #2563eb;
 }
 
-.card-content .message {
-  margin-bottom: 1rem;
+/* Campo com botão de visibilidade */
+.input-group {
+  position: relative;
 }
 
-input[type="password"],
-input[type="text"] {
-  padding-right: 2.5rem;
-  box-sizing: border-box;
-  height: 40px;
-  line-height: normal;
+.input-group .form-control {
+  padding-right: 3rem; /* espaço suficiente para o ícone do olho */
 }
 
 .input-group-text.password-toggle {
-  background-color: #eaf2ff;
-  cursor: pointer;
+  position: absolute;
+  top: 50%;
+  right: 0.75rem;
+  transform: translateY(-50%);
+  background-color: transparent;
   border: none;
-  padding-right: 1rem;
-  padding-left: 1rem;
+  cursor: pointer;
   display: flex;
   align-items: center;
   color: #6c757d;
   font-size: 1.1rem;
+  z-index: 2;
+  pointer-events: auto;
 }
 
 .input-group-text.password-toggle:hover {
   color: #0d6efd;
+}
+
+input[type="password"],
+input[type="text"] {
+  font-size: 0.95rem;
+  background-color: #eaf2ff;
+  color: #000 !important;
 }

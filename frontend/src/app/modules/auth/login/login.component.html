@@ -21,7 +21,6 @@
           <span *ngIf="email?.errors?.['required']">Por favor, digite seu usuário (e-mail de cadastro)!</span>
         </div>
       </div>
-
       <div class="mb-3">
         <label for="senha" class="form-label">Senha</label>
         <div class="input-group">
@@ -37,7 +36,7 @@
             <i class="fa" [ngClass]="showPassword ? 'fa-eye-slash' : 'fa-eye'"></i>
           </span>
         </div>
-        <div *ngIf="password?.touched && password?.invalid" class="invalid-feedback">
+        <div *ngIf="password?.touched && password?.invalid" class="invalid-feedback d-block">
           <span *ngIf="password?.errors?.['required']">Digite uma senha</span>
         </div>
       </div>

@@ -21,7 +21,7 @@ class ClinicController extends Controller
     {
         $data = $request->all();
 
-        $clinicExist = Clinic::where('CNPJ', $data['cnpj'])->first();
+        /* $clinicExist = Clinic::where('CNPJ', $data['cnpj'])->first();
 
         if ($clinicExist) {
             return response()->json([
@@ -29,8 +29,7 @@ class ClinicController extends Controller
                     'cnpj' => ['Este CNPJ já está cadastrado.']
                 ]
             ], 422);
-        }
-        
+        } */
 
         $clinic = Clinic::create([
             'corporate_name' => $data['corporate_name'],

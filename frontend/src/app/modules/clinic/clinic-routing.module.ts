@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { ClinicListComponent } from './clinic-list/clinic-list.component';
 import { ClinicCreateComponent } from './clinic-create/clinic-create.component';
+import { ClinicViewComponent } from './clinic-view/clinic-view.component';
 
 const routes: Routes = [
   {
@@ -15,6 +16,9 @@ const routes: Routes = [
   {
     path: 'edit/:id', component: ClinicCreateComponent
   },
+{
+  path: 'view/:id', component: ClinicViewComponent
+},
 ];
 
 @NgModule({

@@ -8,11 +8,12 @@ import { ClinicListComponent } from './clinic-list/clinic-list.component';
 import { SelectRegionalComponent } from '../components/select-regional/select-regional.component';
 import { ComponentsModule } from '../components/components.module';
 import { ClinicCreateComponent } from './clinic-create/clinic-create.component';
+import { ClinicViewComponent } from './clinic-view/clinic-view.component';
 
 
 
 @NgModule({
-  declarations: [ClinicListComponent, ClinicCreateComponent],
+  declarations: [ClinicListComponent, ClinicCreateComponent, ClinicViewComponent],
   imports: [
     CommonModule,
     ReactiveFormsModule,

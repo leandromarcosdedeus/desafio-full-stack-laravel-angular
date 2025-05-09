@@ -1,0 +1,50 @@
+<div class="container mt-4 p-4 border rounded shadow-sm bg-white" style="max-width: 900px; margin: auto;">
+  <div class="d-flex justify-content-between align-items-center mb-4">
+    <h3 class="fw-bold">Visualizar entidade</h3>
+    <button class="btn btn-primary px-4 py-2" style="background-color: #dbeafe; color: #000; border-color: #93c5fd;"(click)="editar()">editar</button>
+  </div>
+
+  <div class="row mb-3">
+    <div class="col-md-4">
+      <strong>Nome fantasia</strong><br />
+      <span>{{ clinic?.fantasy_name }}</span>
+    </div>
+    <div class="col-md-4">
+      <strong>Razão social</strong><br />
+      <span>{{ clinic?.corporate_name }}</span>
+    </div>
+    <div class="col-md-4">
+      <strong>CNPJ</strong><br />
+      <span>{{ clinic?.cnpj }}</span>
+    </div>
+  </div>
+
+  <div class="row mb-3">
+    <div class="col-md-4">
+      <strong>Especialidades</strong><br />
+      <span>{{ getEspecialidadesResumo() }}</span>
+
+    </div>
+    <div class="col-md-4">
+      <strong>Regional</strong><br />
+      <span>{{ clinic?.regional?.name }}</span>
+    </div>
+    <div class="col-md-4">
+      <strong>Data inauguração</strong><br />
+      <span>{{ clinic?.opening_date | date:'dd/MM/yyyy' }}</span>
+    </div>
+  </div>
+
+  <div class="row mb-4">
+    <div class="col-md-4">
+      <strong>Ativo</strong><br />
+      <span>{{ clinic?.is_active ? 'Sim' : 'Não' }}</span>
+    </div>
+  </div>
+
+  <div class="text-end">
+    <button type="button" class="btn btn-light border px-4 py-2 text-dark" [routerLink]="'/clinic'">
+      Voltar
+    </button>
+  </div>
+</div>

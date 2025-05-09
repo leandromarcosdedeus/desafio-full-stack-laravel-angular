@@ -38,10 +38,10 @@ export class ClinicListComponent implements OnInit, OnDestroy {
       pagingType: 'simple_numbers',
       responsive: true,
       pageLength: 10,
-      dom: "<'row mb-3'<'col-12'f>>" + // <-- barra de pesquisa
-        "<'row'<'col-12'B>>" +      // botões
-        "<'row'<'col-sm-12'tr>>" +
-        "<'row mt-2'<'col-sm-5'i><'col-sm-7'p>>",
+      dom: "<'row mb-3'<'col-12'f>>" +
+     "<'row'<'col-12 text-end'B>>" +
+     "<'row'<'col-sm-12'tr>>" +
+     "<'row mt-2'<'col-sm-5 text-end'i><'col-sm-7 text-end'p>>",
       /* buttons: [
         {
           extend: 'excel',
@@ -130,5 +130,8 @@ export class ClinicListComponent implements OnInit, OnDestroy {
 
   routeEdit(id: number){
     this.router.navigate(['/clinic/edit', id]);
+  }
+  routeView(id: number){
+    this.router.navigate(['/clinic/view', id]);
   }
 }

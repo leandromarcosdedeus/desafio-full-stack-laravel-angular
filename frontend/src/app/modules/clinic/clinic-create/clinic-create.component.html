@@ -23,17 +23,26 @@
               <div class="row">
 
                 <div class="col-sm-12 col-md-6 mb-3">
-                  <label class="form-label" for="corporate_name">Nome</label>
+                  <label class="form-label" for="corporate_name">Razão Social</label>
                   <input
                     type="text"
                     id="corporate_name"
                     class="form-control"
                     formControlName="corporate_name"
-                    placeholder="Razão Social" />
+                    placeholder="Razão Social"
+                    [ngClass]="{
+                      'is-invalid': form.get('corporate_name')?.touched && form.get('corporate_name')?.invalid
+                    }"
+                  />
+                  <div class="invalid-feedback d-block" *ngIf="form.get('corporate_name')?.touched && form.get('corporate_name')?.invalid">
+                    <div *ngIf="form.get('corporate_name')?.errors?.['required']">Campo obrigatório</div>
+                    <div *ngIf="form.get('corporate_name')?.errors?.['minlength']">Mínimo de 10 caracteres</div>
+                  </div>
+
                 </div>
 
                 <div class="col-sm-12 col-md-6 mb-3">
-                  <label class="form-label" for="fantasy_name">Nome</label>
+                  <label class="form-label" for="fantasy_name">Nome Fantasia</label>
                   <input
                     type="text"
                     id="fantasy_name"
@@ -42,15 +51,26 @@
                     placeholder="Nome Fantasia" />
                 </div>
 
-                <div class="col-md-6 col-sm-6">
-                  <label class="form-label" for="cnpj">Nome</label>
+                <div class="col-md-6 col-sm-6 mb-3">
+                  <label class="form-label" for="cnpj">CNPJ</label>
                   <input
                     type="text"
                     id="cnpj"
                     class="form-control"
+                    [ngClass]="{
+                      'is-invalid': form.get('cnpj')?.invalid && form.get('cnpj')?.touched
+                    }"
                     formControlName="cnpj"
                     placeholder="CNPJ" />
+
+                  <div class="invalid-feedback d-block" *ngIf="form.get('cnpj')?.touched && form.get('cnpj')?.invalid">
+                    <div *ngIf="form.get('cnpj')?.errors?.['required']">Campo obrigatório</div>
+                    <div *ngIf="form.get('cnpj')?.errors?.['cnpjInvalido']">CNPJ inválido</div>
+
+                  </div>
                 </div>
+
+
                 <div class="col-sm-12 col-md-6 mb-3">
                   <app-select-regional
                   [label]="'Regional'"
@@ -110,7 +130,7 @@
 
             <div *ngIf="msg" [ngClass]="type === 'success' ? 'alert-success-custom' : 'alert-error-custom'" class="alert-container mt-4">
               <span>{{ msg }}</span>
-              <button type="button" class="btn-ok" (click)="fecharMensagem()">OK</button>
+              <button type="button" class="btn-ok" (click)="closeMSG()">OK</button>
             </div>
 
           </form>

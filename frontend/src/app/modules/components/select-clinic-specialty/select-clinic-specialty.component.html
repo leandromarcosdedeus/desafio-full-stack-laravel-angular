@@ -1,5 +1,5 @@
 <div class="mb-3">
-  <label class="form-label">{{ label }}</label>
+  <label class="form-label fw-semibold">{{ label }}</label>
   <ng-select
     [items]="specialty"
     bindLabel="name"
@@ -12,6 +12,6 @@
     [searchable]="true"
     [loading]="loading"
     loadingText="Carregando..."
-    class="form-control">
+    class="form-select-custom">
   </ng-select>
 </div>

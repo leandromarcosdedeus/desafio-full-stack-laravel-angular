@@ -29,18 +29,19 @@ export class LoginComponent {
       this.loginForm.markAllAsTouched();
       return;
     }
-    if (this.loginForm.valid) {
-      this.authService.login(this.loginForm.value).subscribe(
-        data => {
-          this.handleResponse(data)
-        }
-      )
-      console.log(this.loginForm.value);
-    } else {
-      this.msg = 'Preencha todos os campos corretamente.';
-      this.type = 'error';
-    }
+
+    this.authService.login(this.loginForm.value).subscribe({
+      next: (data) => {
+        this.handleResponse(data);
+      },
+      error: (err) => {
+        // Aqui você captura o erro retornado pelo backend
+        this.msg = 'Dados incorretos. Por favor, revise seus dados\n e tente novamente.';
+        this.type = 'error';
+      }
+    });
   }
+
 
   get email() {
     return this.loginForm.get('email');

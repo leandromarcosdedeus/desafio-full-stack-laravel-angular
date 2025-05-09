@@ -5,3 +5,14 @@
 .message--success {
   color: #28a745;
 }
+
+.message{
+  margin: 5px;
+  font-size: 18px;
+  margin-bottom: 7px;
+}
+
+.card-content{
+  border-radius: 25px;
+  min-width: 600px;
+}

@@ -6,6 +6,7 @@ Este repositório contém uma aplicação full stack com **Laravel (backend)** e
 
 - PHP = 7.0
 - Composer = 2.2
+- Laravel = 5.4
 - Node.js >= 18.7
 - Angular = 17
 - MySQL ou outro banco compatível

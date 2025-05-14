@@ -89,6 +89,14 @@ cd ../frontend
 npm install
 ```
 
+### 9.1 Caso ocorra erro dependências
+
+```bash
+Para instalar ignorando conflitos de pacotes
+
+npm install --legacy-peer-deps
+```
+
 ### 10. Rode a aplicação Angular
 
 ```bash

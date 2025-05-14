@@ -99,3 +99,14 @@ Acesse no navegador: [http://localhost:4200](http://localhost:4200)
 
 ---
 
+### 11. Usuário e Senha
+
+Faça login utilizado um dos seguintes usuarios:
+
+                'email' => 'admin@example.com',
+                'password' => 'password123', 
+
+                'email' => 'joao@example.com',
+                'password' => 'senha123'
+---
+

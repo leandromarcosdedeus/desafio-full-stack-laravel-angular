@@ -101,6 +101,10 @@ npm install --legacy-peer-deps
 
 ```bash
 ng serve
+
+ou
+
+npm start
 ```
 
 Acesse no navegador: [http://localhost:4200](http://localhost:4200)
